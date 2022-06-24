@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculadora - Surebet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">É surebet?</h1>
+
+        <br>
+
+        <div class="container">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">1ª quota</span>
+                <input type="number" class="form-control" id="q1" aria-describedby="basic-addon1" onblur="surebet()">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">2ª quota</span>
+                <input type="number" class="form-control" id="q2" aria-describedby="basic-addon1" onblur="surebet()">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Resultado</span>
+                <input type="number" class="form-control" id="res" disabled aria-describedby="basic-addon1">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <h1 class="text-center">Calculadora - Dutching</h1>
+
+        <br>
+
+        <div class="container">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Investimento</span>
+                <span class="input-group-text" id="basic-addon1">R$</span>
+                <input type="number" class="form-control" id="inv" aria-label="Investimento"
+                    aria-describedby="basic-addon1" style="font-weight: bold; color: white;">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Lucro</span>
+                <span class="input-group-text" id="basic-addon1">R$</span>
+                <input type="number" class="form-control" id="luc" disabled aria-label="Lucro"
+                    aria-describedby="basic-addon1" style="font-weight: bold; color: white;">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Retorno</span>
+                <span class="input-group-text" id="basic-addon1">R$</span>
+                <input type="number" class="form-control" id="ret" disabled aria-label="Retorno"
+                    aria-describedby="basic-addon1" style="font-weight: bold; color: white;">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Odds</th>
+                        <th scope="col">Investimento</th>
+                        <th scope="col">Retorno</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">1º</span>
+                                <input type="number" class="form-control" aria-label="Retorno"
+                                    aria-describedby="basic-addon1" id="o1" onblur="calcular()">
+                            </div>
+                        </td>
+                        <td id="i1"></td>
+                        <td id="r1"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">2º</span>
+                                <input type="number" class="form-control" aria-label="Retorno"
+                                    aria-describedby="basic-addon1" id="o2" onblur="calcular()">
+                            </div>
+                        </td>
+                        <td id="i2"></td>
+                        <td id="r2"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">3º</span>
+                                <input type="number" class="form-control" aria-label="Retorno"
+                                    aria-describedby="basic-addon1" id="o3" onblur="calcular()">
+                            </div>
+                        </td>
+                        <td id="i3"></td>
+                        <td id="r3"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">4º</span>
+                                <input type="number" class="form-control" aria-label="Retorno"
+                                    aria-describedby="basic-addon1" id="o4" onblur="calcular()">
+                            </div>
+                        </td>
+                        <td id="i4"></td>
+                        <td id="r4"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">5º</span>
+                                <input type="number" class="form-control" aria-label="Retorno"
+                                    aria-describedby="basic-addon1" id="o5" onblur="calcular()">
+                            </div>
+                        </td>
+                        <td id="i5"></td>
+                        <td id="r5"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let good = '#008009';
+        let bad = '#b50000';
+
+        function surebet() {
+            if (!isNaN(parseFloat($('#q1').val())) && !isNaN(parseFloat($('#q2').val()))) {
+                var q1 = parseFloat($('#q1').val());
+                var q2 = parseFloat($('#q2').val());
+                var res = parseFloat((1 / q1) + (1 / q2)).toFixed(2);
+
+                $('#res').css(
+                    {
+                        'color': 'white',
+                        'font-weight': 'bold'
+                    }
+                );
+
+                if (res >= 1) {
+                    $('#res').val(res);
+                    $('#res').css('background-color', bad);
+                } else {
+                    $('#res').val(res);
+                    $('#res').css('background-color', good);
+                }
+            }
+        }
+
+
+        function calcular() {
+            var inv = $('#inv').val();
+            var odd = [
+                parseFloat($('#o1').val()),
+                parseFloat($('#o2').val()),
+                parseFloat($('#o3').val()),
+                parseFloat($('#o4').val()),
+                parseFloat($('#o5').val())
+            ];
+        }
+    </script>
+</body>
+
+</html>
